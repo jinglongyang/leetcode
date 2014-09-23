@@ -1,3 +1,5 @@
+package linkedlist;
+
 /**
  * https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/
  * <p/>
