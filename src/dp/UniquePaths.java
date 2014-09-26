@@ -14,4 +14,19 @@ package dp;
  * Note: m and n will be at most 100.
  */
 public class UniquePaths {
+    public int uniquePaths(int m, int n) {
+        int[][] hash = new int[m][n];
+        for (int i = 0; i < n; i++) {
+            hash[0][i] = 1;
+        }
+        for (int i = 0; i < m; i++) {
+            hash[i][0] = 1;
+        }
+        for (int x = 1; x < m; x++) {
+            for (int y = 1; y < n; y++) {
+                hash[x][y] = hash[x - 1][y] + hash[x][y - 1];
+            }
+        }
+        return hash[m - 1][n - 1];
+    }
 }
