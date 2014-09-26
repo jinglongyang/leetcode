@@ -8,7 +8,7 @@ package dp;
  * The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
  * <p/>
  * How many possible unique paths are there?
- * ![alt text](robot_maze.png "Robot Maze")
+ * <a href="https://github.com/jinglongyang/leetcode/blob/master/src/dp/robot_maze.png">Robot Maze</a>
  * Above is a 3 x 7 grid. How many possible unique paths are there?
  * <p/>
  * Note: m and n will be at most 100.
