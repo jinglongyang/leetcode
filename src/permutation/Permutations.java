@@ -14,25 +14,23 @@ public class Permutations {
     public List<List<Integer>> permute(int[] num) {
         List<List<Integer>> res = new ArrayList<>();
         int l = num == null ? 0 : num.length;
-        if (l == 0) {
-            return res;
-        }
-        helper(res, new ArrayList<Integer>(), l, num);
+        if (l == 0) return res;
+        helper(res, new ArrayList<Integer>(), l, new boolean[l], num);
         return res;
     }
 
-    private void helper(List<List<Integer>> res, List<Integer> path, int length, int[] num) {
-        if (path.size() == length) {
+    private void helper(List<List<Integer>> res, List<Integer> path, int length, boolean[] visited, int[] num) {
+        if (path.size() >= length) {
             res.add(new ArrayList<>(path));
             return;
         }
         for (int i = 0; i < length; i++) {
-            if (path.contains(num[i])) {
-                continue;
-            }
+            if (visited[i]) continue;
+            visited[i] = true;
             path.add(num[i]);
-            helper(res, path, length, num);
+            helper(res, path, length, visited, num);
             path.remove(path.size() - 1);
+            visited[i] = false;
         }
     }
 
