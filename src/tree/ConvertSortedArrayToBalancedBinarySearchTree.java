@@ -2,6 +2,7 @@ package tree;
 
 /**
  * http://leetcode.com/2010/11/convert-sorted-array-into-balanced.html
+ * Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
  */
 public class ConvertSortedArrayToBalancedBinarySearchTree {
     private static class TreeNode {
