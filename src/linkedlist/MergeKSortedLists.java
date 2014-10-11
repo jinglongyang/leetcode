@@ -1,9 +1,6 @@
 package linkedlist;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
@@ -20,6 +17,35 @@ public class MergeKSortedLists {
             val = x;
             next = null;
         }
+    }
+
+    private static class ListNodeComparator implements Comparator<ListNode> {
+        public int compare(ListNode l1, ListNode l2) {
+            if (l1.val > l2.val) return 1;
+            if (l1.val == l2.val) return 0;
+            return -1;
+        }
+    }
+
+    public ListNode mergeKLists2(List<ListNode> lists) {
+        if (lists == null || lists.size() == 0) return null;
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.size(), new ListNodeComparator());
+        for (ListNode node : lists) {
+            if (node != null) {
+                queue.offer(node);
+            }
+        }
+        ListNode head = new ListNode(0);
+        ListNode current = head;
+        while (!queue.isEmpty()) {
+            ListNode node = queue.poll();
+            current.next = node;
+            current = current.next;
+            if (node.next != null) {
+                queue.offer(node.next);
+            }
+        }
+        return head.next;
     }
 
     public ListNode mergeKLists(List<ListNode> lists) {
