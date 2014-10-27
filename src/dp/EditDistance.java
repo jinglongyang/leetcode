@@ -11,6 +11,30 @@ package dp;
  */
 public class EditDistance {
     public int minDistance(String word1, String word2) {
+        int m1 = word1 == null ? 0 : word1.length(), m2 = word2 == null ? 0 : word2.length();
+        int[][] dp = new int[m1 + 1][m2 + 1];
+        for (int i = 0; i <= m1; i++) {
+            dp[i][0] = i;
+        }
+        for (int i = 0; i <= m2; i++) {
+            dp[0][i] = i;
+        }
+        for (int i = 1; i <= m1; i++) {
+            for (int j = 1; j <= m2; j++) {
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    //replace dp[i - 1][j - 1]
+                    //insert dp[i - 1][j]
+                    //delete dp[i][j-1]
+                    dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i][j - 1]));
+                }
+            }
+        }
+        return dp[m1][m2];
+    }
 
+    public static void main(String[] args) {
+        System.out.println(new EditDistance().minDistance("a", "b"));
     }
 }
