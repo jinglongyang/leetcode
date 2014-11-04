@@ -1,5 +1,7 @@
 package array;
 
+import java.util.Arrays;
+
 /**
  * https://oj.leetcode.com/problems/sort-colors/
  * <p/>
@@ -29,5 +31,11 @@ public class SortColors {
         int tmp = a[i];
         a[i] = a[j];
         a[j] = tmp;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {2, 0, 1};
+        new SortColors().sortColors(a);
+        System.out.println(Arrays.toString(a));
     }
 }
