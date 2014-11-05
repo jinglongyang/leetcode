@@ -23,7 +23,7 @@ public class ValidParentheses {
             if ('(' == tmp || '{' == tmp || '[' == tmp) {
                 stack.push(tmp);
             } else {
-                if (stack.isEmpty() || map.get(tmp) != stack.peek()) {
+                if (stack.isEmpty() || map.get(tmp).charValue() != stack.peek().charValue()) {
                     return false;
                 } else {
                     stack.pop();
