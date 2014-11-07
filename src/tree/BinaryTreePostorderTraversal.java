@@ -19,47 +19,31 @@ import java.util.Stack;
  * return [3,2,1].
  */
 public class BinaryTreePostorderTraversal {
-    private static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-    }
-
-    private enum Status {
-        unvisited, visiting;
-    }
-
-    private static class TreeNodeWrapper {
-        private TreeNode node;
-        private Status status;
-
-        TreeNodeWrapper(TreeNode node) {
-            this.node = node;
-            status = Status.unvisited;
-        }
-    }
-
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new LinkedList<>();
         if (root == null) return res;
-        Stack<TreeNodeWrapper> stack = new Stack<>();
-        stack.push(new TreeNodeWrapper(root));
-        while (!stack.isEmpty()) {
-            TreeNodeWrapper wrapper = stack.peek();
-            TreeNode node = wrapper.node;
-            if (wrapper.status == Status.visiting || (node.left == null && node.right == null)) {
-                res.add(node.val);
-                stack.pop();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root, prev = null;
+        while (!stack.isEmpty() || current != null) {
+            if (current != null) {
+                stack.push(current);
+                current = current.left;
             } else {
-                wrapper.status = Status.visiting;
-                if (node.right != null) {
-                    stack.push(new TreeNodeWrapper(node.right));
-                }
-                if (node.left != null) {
-                    stack.push(new TreeNodeWrapper(node.left));
+                TreeNode node = stack.peek();
+                if (node.right == null || node.right == prev) {
+                    res.add(node.val);
+                    prev = stack.pop();
+                } else {
+                    current = node.right;
                 }
             }
         }
         return res;
+    }
+
+    private static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
     }
 }
