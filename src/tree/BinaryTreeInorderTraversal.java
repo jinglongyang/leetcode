@@ -22,50 +22,33 @@ import java.util.Stack;
  * Note: Recursive solution is trivial, could you do it iteratively?
  */
 public class BinaryTreeInorderTraversal {
-    private static class TreeNode {
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        int val;
-        TreeNode left;
-        TreeNode right;
-    }
-
-    private enum Status {
-        unvisited, visiting
-    }
-
-    private static class TreeNodeWrapper {
-        private TreeNode node;
-        private Status status;
-
-        TreeNodeWrapper(TreeNode node) {
-            this.node = node;
-            this.status = Status.unvisited;
-        }
-
-    }
-
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new LinkedList<>();
         if (root == null) return res;
-        Stack<TreeNodeWrapper> stack = new Stack<>();
-        stack.push(new TreeNodeWrapper(root));
-        while (!stack.isEmpty()) {
-            TreeNodeWrapper wrapper = stack.peek();
-            TreeNode node = wrapper.node;
-            if (wrapper.status == Status.unvisited && node.left != null) {
-                wrapper.status = Status.visiting;
-                stack.push(new TreeNodeWrapper(node.left));
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        while (!stack.isEmpty() || current != null) {
+            if (current != null) {
+                stack.push(current);
+                current = current.left;
             } else {
-                stack.pop();
+                TreeNode node = stack.pop();
                 res.add(node.val);
                 if (node.right != null) {
-                    stack.push(new TreeNodeWrapper(node.right));
+                    current = node.right;
                 }
             }
         }
         return res;
+    }
+
+    private static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
     }
 }
