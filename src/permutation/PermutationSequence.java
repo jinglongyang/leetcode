@@ -1,5 +1,8 @@
 package permutation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * https://oj.leetcode.com/problems/permutation-sequence/
  * <p/>
@@ -19,10 +22,10 @@ public class PermutationSequence {
     public String getPermutation(int n, int k) {
         if (k < 1 || n < 1) return "";
         int fact = 1;
-        int[] num = new int[n];
+        List<Integer> list = new ArrayList<>(2 * n);
         for (int i = 0; i < n; i++) {
-            num[i] = i + 1;
-            fact *= num[i];
+            list.add(i + 1);
+            fact *= (i + 1);
         }
         if (k > fact) return "";
         k--;
@@ -30,10 +33,8 @@ public class PermutationSequence {
         for (int i = 0; i < n; i++) {
             fact /= (n - i);
             int chose = k / fact;
-            res.append(num[chose]);
-            for (int j = chose; j < n - i && j + 1 < n; j++) {
-                num[j] = num[j + 1];
-            }
+            res.append(list.get(chose));
+            list.remove(chose);
             k %= fact;
         }
         return res.toString();
