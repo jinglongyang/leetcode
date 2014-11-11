@@ -13,12 +13,13 @@ public class DivideTwoIntegers {
             sign *= -1;
         }
         int res = 0;
-        long a = dividend > 0 ? dividend : dividend;
-        long b = divisor > 0 ? divisor : -divisor;
+        long a = Math.abs((long) dividend);
+        long b = Math.abs((long) divisor);
+
         while (a >= b) {
             long t = b;
-            for (int i = 1; a >= t; t <<= 1, t <<= 1) {
-                a = a - t;
+            for (int i = 1; a >= t; i <<= 1, t <<= 1) {
+                a -= t;
                 res += i;
             }
         }
