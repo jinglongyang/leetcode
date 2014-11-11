@@ -14,19 +14,17 @@ public class FindMinimumRotatedSortedArray {
         if (l == 0) return -1;
         if (num[0] <= num[l - 1]) return num[0];
         int low = 0, high = l - 1;
-        while (low <= high) {
+        while (low < high && num[low] >= num[high]) {
             int mid = low + (high - low) / 2;
             if (num[mid] > num[high]) {
                 low = mid + 1;
-            } else if (num[mid] < num[mid - 1]) {
-                return num[mid];
             } else {
-                high = mid - 1;
+                high = mid;
             }
         }
-        return -1;
+        return num[low];
     }
-    
+
     public int findMin2(int[] num) {
         int l = num == null ? 0 : num.length;
         if (l == 0) return 0;
