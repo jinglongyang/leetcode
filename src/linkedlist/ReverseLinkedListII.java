@@ -14,6 +14,34 @@ package linkedlist;
  * 1 ≤ m ≤ n ≤ length of list.
  */
 public class ReverseLinkedListII {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if (head == null || m > n || n < 0 || m == n) return head;
+        int index = 1;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode node = dummy;
+        while (node != null && index < m) {
+            index++;
+            node = node.next;
+        }
+        node.next = reverse(node.next, n - m);
+        return dummy.next;
+    }
+
+    private ListNode reverse(ListNode head, int n) {
+        ListNode prev = null, node = head;
+        int index = 0;
+        while (node != null && index <= n) {
+            ListNode next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+            index++;
+        }
+        head.next = node;
+        return prev;
+    }
+
     /**
      * Definition for singly-linked list.
      */
@@ -25,9 +53,5 @@ public class ReverseLinkedListII {
             val = x;
             next = null;
         }
-    }
-
-    public ListNode reverseBetween(ListNode head, int m, int n) {
-        return null;
     }
 }
