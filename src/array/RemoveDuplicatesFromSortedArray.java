@@ -15,8 +15,7 @@ public class RemoveDuplicatesFromSortedArray {
         int i = 0;
         for (int j = 1; j < l; j++) {
             if (A[j] != A[j - 1]) {
-                i++;
-                A[i] = A[j];
+                A[++i] = A[j];
             }
         }
         return i + 1;
