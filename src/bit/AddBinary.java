@@ -1,3 +1,5 @@
+package bit;
+
 /**
  * Created by jinglongyang on 10/12/14.
  */
