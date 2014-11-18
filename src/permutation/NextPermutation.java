@@ -27,7 +27,7 @@ public class NextPermutation {
         if (idx > 0) {
             idx--;
             int right = l - 1;
-            while (right >= 0 && num[right] < num[idx]) {
+            while (right >= 0 && num[right] <= num[idx]) {
                 right--;
             }
             swap(num, idx, right);
