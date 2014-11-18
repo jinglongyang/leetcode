@@ -23,7 +23,7 @@ public class MultiplyStrings {
         for (int i = 0; i < l; i++) {
             int digit = res[i] % 10;
             int carry = res[i] / 10;
-            res[i + 1] = +carry;
+            res[i + 1] += carry;
             sb.insert(0, digit);
         }
         while (sb.length() > 0 && sb.charAt(0) == '0') {
