@@ -24,14 +24,14 @@ import java.util.Set;
  * All words contain only lowercase alphabetic characters.
  */
 public class WordLadder {
-    private static class Wrapper {
-        private String word;
-        private int step;
-
-        Wrapper(String word, int step) {
-            this.word = word;
-            this.step = step;
-        }
+    public static void main(String[] args) {
+        Set<String> dict = new HashSet<>();
+        dict.add("a");
+        dict.add("b");
+        dict.add("c");
+        System.out.println(new WordLadder().ladderLength("a", "c", dict));
+        WordLadder wordLadder = new WordLadder();
+        WordLadder.Wrapper wrapper = wordLadder.new Wrapper("", 1);
     }
 
     public int ladderLength(String start, String end, Set<String> dict) {
@@ -66,11 +66,13 @@ public class WordLadder {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-        Set<String> dict = new HashSet<>();
-        dict.add("a");
-        dict.add("b");
-        dict.add("c");
-        System.out.println(new WordLadder().ladderLength("a", "c", dict));
+    private class Wrapper {
+        private String word;
+        private int step;
+
+        Wrapper(String word, int step) {
+            this.word = word;
+            this.step = step;
+        }
     }
 }
